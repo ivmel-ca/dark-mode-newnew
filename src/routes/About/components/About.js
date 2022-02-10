@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
 import { useDarkMode } from "../../../custom-hooks/useDarkMode";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 
-import "../styles/_app.scss";
-
 const getIconParams = (darkMode) => {
   return darkMode ? { icon: faSun, color: "#FFA500" } : { icon: faMoon };
 };
 
-function App() {
+const About = () => {
   const [isDarkTheme, toggleDarkTheme] = useDarkMode();
   const [iconParams, setIconParams] = useState(getIconParams(isDarkTheme));
 
@@ -25,7 +22,7 @@ function App() {
     <div className="app">
       <div className="level">
         <div>
-          <h1 className="title">Dark Mode Challenge</h1>
+          <h1 className="title">Dark Mode Challenge | About</h1>
         </div>
 
         {/* --The button that should toggle dark mode-- */}
@@ -77,9 +74,9 @@ function App() {
           <a className="button is-link">Submit</a>
         </div>
       </section>
-      <Link to="/about">Visit about page</Link>
+      <Link to="/">Back to homepage</Link>
     </div>
   );
-}
+};
 
-export default App;
+export default About;

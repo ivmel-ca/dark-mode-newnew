@@ -1,5 +1,18 @@
-import Home from './App';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// Use something like react-router-dom to manage multiple pages/routes
+import Home from "./App";
+import About from "./About";
 
-export default Home;
+const AppRouting = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </Router>
+  );
+};
+
+export default AppRouting;
