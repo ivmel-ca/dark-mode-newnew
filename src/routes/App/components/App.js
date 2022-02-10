@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";
+
+import { useDarkMode } from "../../../custom-hooks/useDarkMode";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon } from "@fortawesome/free-solid-svg-icons";
+import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+
 import "../styles/_app.scss";
 
+const getIconParams = (darkMode) => {
+  return darkMode ? { icon: faSun, color: "#FFA500" } : { icon: faMoon };
+};
+
 function App() {
-  const lsDarkThemeValue =
-    JSON.parse(localStorage.getItem("darkTheme")) || false;
-
-  const [isDarkTheme, setDarkTheme] = useState(lsDarkThemeValue);
-
-  const toggleDarkTheme = () => {
-    setDarkTheme(!isDarkTheme);
-    localStorage.setItem("darkTheme", JSON.stringify(!isDarkTheme));
-  };
+  const [isDarkTheme, toggleDarkTheme] = useDarkMode();
+  const [iconParams, setIconParams] = useState(getIconParams(isDarkTheme));
 
   useEffect(() => {
-    isDarkTheme
-      ? document.documentElement.classList.add("dark-mode")
-      : document.documentElement.classList.remove("dark-mode");
+    const params = getIconParams(isDarkTheme);
+    setIconParams(params);
   }, [isDarkTheme]);
 
   return (
@@ -32,7 +32,7 @@ function App() {
           onClick={toggleDarkTheme}
           className="app__dark-mode-btn icon level-right"
         >
-          <FontAwesomeIcon icon={faMoon} />
+          <FontAwesomeIcon {...iconParams} />
         </button>
       </div>
 
